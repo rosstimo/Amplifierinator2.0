@@ -1,35 +1,29 @@
 Public Class CommonEmitter
-    Inherits Amplifier
-
-    Public Shadows Property VCC As Integer
-    Public Shadows Property R1 As Integer
-    Public Shadows Property R2 As Integer
-    Public Shadows Property RC As Integer
-    Public Shadows Property RE As Integer
-    Public Shadows Property beta As Integer
-
+    Implements IBJTAmplifier
+    'Inherits Amplifier
 
     'Properties
-
-    Private _zin As Decimal
-    Public Overrides Property zin() As Decimal
-        Get
-            Return _zin
-        End Get
-        Set(ByVal value As Decimal)
-            _zin = value
-        End Set
-    End Property
+    Public Property VCC As Integer Implements IBJTAmplifier.VCC
+    'Private _zin As Decimal
+    'Public Overrides Property zin() As Decimal
+    '    Get
+    '        Return _zin
+    '    End Get
+    '    Set(ByVal value As Decimal)
+    '        _zin = value
+    '    End Set
+    'End Property
 
     'fields
 
     Sub New()
-        Me.zin = Me.setZin()
+        'Me.zin = Me.setZin()
 
     End Sub
 
 
-    Private Function setZin() As Decimal
+    Private Function zin() As Decimal Implements IBJTAmplifier.zin
+        'Inherits Amplifier
         Return CDec((Me.R1 ^ -1 + Me.R2 ^ -1 + ((Me.beta + 1) * (Me.rPrimeE + Me.rSwamp)) ^ -1) ^ -1)
     End Function
 

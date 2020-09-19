@@ -1,15 +1,16 @@
 Public Class Amplifier
-    Inherits UniversalBiased
+    'Inherits UniversalBiased
+    Implements IBJTAmplifier
     'Components
-    Public Overrides Property VCC As Integer
-    Public Overrides Property R1 As Integer
-    Public Overrides Property R2 As Integer
-    Public Overrides Property RC As Integer
-    Public Overrides Property RE As Integer
-    Public Overrides Property beta As Integer
+    Public Property VCC As Integer Implements IBJTAmplifier.VCC
+    Public Property R1 As Integer Implements IBJTAmplifier.R1
+    Public Property R2 As Integer Implements IBJTAmplifier.R2
+    Public Property RC As Integer Implements IBJTAmplifier.RC
+    Public Property RE As Integer Implements IBJTAmplifier.RE
+    Public Property beta As Integer Implements IBJTAmplifier.beta
 
     Private _rgen As Decimal
-    Public Property rgen() As Decimal
+    Public Property rgen() As Decimal Implements IBJTAmplifier.rgen
         Get
             Return _rgen
         End Get
