@@ -137,18 +137,18 @@ Public Class Amplifier
 
 
     Public Function Fcin() As Decimal
-        Return ElectronicsMath.CriticalFrequency(Me.RthCIn, Me.cIn)
+        Return LibElectronicsMath.CriticalFrequency(Me.RthCIn, Me.cIn)
     End Function
     Public Function FcOut() As Decimal
-        Return ElectronicsMath.CriticalFrequency(Me.RthCOut, Me.cOut)
+        Return LibElectronicsMath.CriticalFrequency(Me.RthCOut, Me.cOut)
     End Function
 
 
     Public Function LowestCIn() As Double
-        Return ElectronicsMath.Capacitance(Me.RthCIn, 57.0#)
+        Return LibElectronicsMath.Capacitance(Me.RthCIn, 57.0#)
     End Function
     Public Function LowestCOut() As Double
-        Return ElectronicsMath.Capacitance(Me.RthCOut, 57.0#)
+        Return LibElectronicsMath.Capacitance(Me.RthCOut, 57.0#)
     End Function
 
     Public Function RthCBypass() As Double ' CE Only
@@ -156,11 +156,11 @@ Public Class Amplifier
     End Function
 
     Public Function FcBypass() As Decimal
-        Return ElectronicsMath.CriticalFrequency(Me.RthCBypass, Me.cBypass)
+        Return LibElectronicsMath.CriticalFrequency(Me.RthCBypass, Me.cBypass)
     End Function
 
     Public Function LowestCBypass() As Double
-        Return ElectronicsMath.Capacitance(Me.RthCBypass, 57.0#)
+        Return LibElectronicsMath.Capacitance(Me.RthCBypass, 57.0#)
     End Function
 
     Public Function FcLow() As Decimal 'CE, CB, CC

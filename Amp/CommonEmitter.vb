@@ -1,9 +1,9 @@
 Public Class CommonEmitter
-    Implements IBJTAmplifier
+    'Implements IBJTAmplifier
     'Inherits Amplifier
 
     'Properties
-    Public Property VCC As Integer Implements IBJTAmplifier.VCC
+    Public Property VCC As Integer 'Implements IBJTAmplifier.VCC
     'Private _zin As Decimal
     'Public Overrides Property zin() As Decimal
     '    Get
@@ -22,7 +22,7 @@ Public Class CommonEmitter
     End Sub
 
 
-    Private Function zin() As Decimal Implements IBJTAmplifier.zin
+    Private Function zin() As Decimal 'Implements IBJTAmplifier.zin
         'Inherits Amplifier
         Return CDec((Me.R1 ^ -1 + Me.R2 ^ -1 + ((Me.beta + 1) * (Me.rPrimeE + Me.rSwamp)) ^ -1) ^ -1)
     End Function

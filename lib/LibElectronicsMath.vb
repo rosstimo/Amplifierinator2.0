@@ -1,4 +1,4 @@
-Public Class ElectronicsMath
+Public Class LibElectronicsMath
 
     Public Shared Function CriticalFrequency(ByRef R As Double, ByRef C As Double) As Decimal
         Return CDec((2 * Math.PI * R * C) ^ -1)

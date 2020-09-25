@@ -1,6 +1,10 @@
 Imports System
+Imports R = Amplifierinator.ElectronicComponentsLib.Resistor
+Imports C = Amplifierinator.ElectronicComponentsLib.Capacitor
+Imports Q = Amplifierinator.ElectronicComponentsLib.BJT
 
 Module Amplifierinator
+
     Sub Main(args As String())
         'Dim testCEAmp = New UniversalBiased() With {.VCC = 24, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(22 * 10 ^ 3), .RC = 3300, .RE = 830, .beta = 200, .isNPN = True}
         'Dim testCBAmp = New CommonBase() With {.VCC = 24, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(22 * 10 ^ 3), .RC = 3300, .RE = 820, .beta = 200, .isNPN = True, .rGen = 50, .RL = 3300, .rSwamp = 0, .C1 = 100 * 10 ^ -6, .C2 = 10 * 10 ^ -6, .C3 = 10 * 10 ^ -6}
@@ -58,4 +62,6 @@ Module Amplifierinator
 
         Console.Read()
     End Sub
+
+
 End Module
