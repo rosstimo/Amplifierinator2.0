@@ -1,5 +1,5 @@
 Public Class CommonEmitter
-    'Implements IBJTAmplifier
+    Implements ICommonEmitter, IBJTAmplifier, IUviversalBias
     'Inherits Amplifier
 
     'Properties
