@@ -1,5 +1,5 @@
 ﻿Public Interface IBJTAmplifier
-    'Inherits IBJTBias
+
     'Components
     Property rgen() As Decimal
     Property RL() As Decimal

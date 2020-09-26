@@ -1,3 +1,4 @@
 ﻿Public Interface ICommonEmitter
-    'Inherits IBJTAmplifier
+    Inherits IBJTAmplifier
+
 End Interface

@@ -63,15 +63,15 @@ Public Class UniversalBiased
         End Set
     End Property
 
-    Private _IsNPN As Boolean
-    Public Property isNPN As Boolean
-        Get
-            Return _IsNPN
-        End Get
-        Set(ByVal value As Boolean)
-            _IsNPN = value
-        End Set
-    End Property
+    'Private _IsNPN As Boolean
+    'Public Property isNPN As Boolean
+    '    Get
+    '        Return _IsNPN
+    '    End Get
+    '    Set(ByVal value As Boolean)
+    '        _IsNPN = value
+    '    End Set
+    'End Property
 
     'fields
 

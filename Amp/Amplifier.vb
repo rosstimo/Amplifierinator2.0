@@ -2,7 +2,7 @@ Public Class Amplifier
     Inherits UniversalBiased
     'Implements IBJTAmplifier
     'Components
-
+    'Public Overrides Property R1 As Integer
     Private _rgen As Decimal
     Public Property rgen() As Decimal
         Get
@@ -69,6 +69,8 @@ Public Class Amplifier
 
     Private _FcLowTarget As Decimal
 
+    ' Public UniversalBias = New UniversalBiased With {.R1 = Me.R1, .R2 = Me.R2, .RC = Me.RC, .RE = Me.RE, .beta = Me.beta, .VCC = Me.VCC}
+
     Sub New()
         Console.WriteLine("Amp")
         Console.WriteLine(Me.R1)
@@ -121,17 +123,11 @@ Public Class Amplifier
         Return CDec(Me.IC * Me.rLoadAC)
     End Function
 
-
     Public Function vin() As Decimal 'CE, CB
         Return Me.IE * (Me.rPrimeE + Me.rSwamp)
     End Function
 
-
-
     'Frequency Response
-
-
-
     Public Function RthCIn() As Double 'CE, CB, CC
         Return (Me.rgen ^ -1 + Me.zin ^ -1) ^ -1
     End Function
