@@ -1,4 +1,4 @@
-Public Class CommonCollector
+Public Class UniversalBiasCommonCollector
     'Inherits UniversalBiased
     Inherits Amplifier
 

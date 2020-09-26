@@ -1,16 +1,10 @@
 Public Class Amplifier
-    'Inherits UniversalBiased
-    Implements IBJTAmplifier
+    Inherits UniversalBiased
+    'Implements IBJTAmplifier
     'Components
-    Public Property VCC As Integer Implements IBJTAmplifier.VCC
-    Public Property R1 As Integer Implements IBJTAmplifier.R1
-    Public Property R2 As Integer Implements IBJTAmplifier.R2
-    Public Property RC As Integer Implements IBJTAmplifier.RC
-    Public Property RE As Integer Implements IBJTAmplifier.RE
-    Public Property beta As Integer Implements IBJTAmplifier.beta
 
     Private _rgen As Decimal
-    Public Property rgen() As Decimal Implements IBJTAmplifier.rgen
+    Public Property rgen() As Decimal
         Get
             Return _rgen
         End Get
@@ -75,7 +69,12 @@ Public Class Amplifier
 
     Private _FcLowTarget As Decimal
 
-'All BJT amplifier
+    Sub New()
+        Console.WriteLine("Amp")
+        Console.WriteLine(Me.R1)
+    End Sub
+
+    'All BJT amplifier
     Public Function rPrimeE() As Decimal 'CE, CB, CC
         Return 0.026D / Me.IE
     End Function
@@ -101,8 +100,9 @@ Public Class Amplifier
         Return CDec(10 * Math.Log10(Me.Ap))
     End Function
 
+    'Any Bias
     'CE, CB Only
-    Public Function rEBypass() As Decimal'CE, CB
+    Public Function rEBypass() As Decimal 'CE, CB
         Return CDec(Me.RE - Me.rSwamp)
     End Function
 
@@ -110,7 +110,8 @@ Public Class Amplifier
     Public Function Zout() As Decimal
         Return Me.RC
     End Function
-   Public Function icSatAC() As Decimal 'CE, CB
+
+    Public Function icSatAC() As Decimal 'CE, CB
         Return Me.IC + (Me.VCE / Me.rLoadAC)
     End Function
     Public Function rLoadAC() As Decimal'CE, CB
@@ -119,7 +120,9 @@ Public Class Amplifier
     Public Function vout() As Decimal 'max TODO rename?? deltaIB ??
         Return CDec(Me.IC * Me.rLoadAC)
     End Function
-     Public Function vin() As Decimal 'CE, CB
+
+
+    Public Function vin() As Decimal 'CE, CB
         Return Me.IE * (Me.rPrimeE + Me.rSwamp)
     End Function
 
@@ -128,13 +131,13 @@ Public Class Amplifier
     'Frequency Response
 
 
+
     Public Function RthCIn() As Double 'CE, CB, CC
-        Return (Me.rGen ^ -1 + Me.Zin ^ -1) ^ -1
+        Return (Me.rgen ^ -1 + Me.zin ^ -1) ^ -1
     End Function
     Public Function RthCOut() As Double 'CE, CB, CC
         Return Me.Zout + Me.RL
     End Function
-
 
     Public Function Fcin() As Decimal
         Return LibElectronicsMath.CriticalFrequency(Me.RthCIn, Me.cIn)
@@ -143,29 +146,36 @@ Public Class Amplifier
         Return LibElectronicsMath.CriticalFrequency(Me.RthCOut, Me.cOut)
     End Function
 
+    Public fcLowTargetDefault As Decimal = 100D
+    Public numberOfCapacitors As Integer = 2I
+
+    Public Overloads Function fcLowTargetOffset(ByVal numberOfCapacitors As Integer, ByVal fcLowTarget As Decimal) As Double
+        Return (fcLowTarget / numberOfCapacitors) * Math.Sqrt(numberOfCapacitors)
+    End Function
 
     Public Function LowestCIn() As Double
-        Return LibElectronicsMath.Capacitance(Me.RthCIn, 57.0#)
+        Return LibElectronicsMath.Capacitance(Me.RthCIn, fcLowTargetOffset(numberOfCapacitors, fcLowTargetDefault))
     End Function
     Public Function LowestCOut() As Double
-        Return LibElectronicsMath.Capacitance(Me.RthCOut, 57.0#)
-    End Function
-
-    Public Function RthCBypass() As Double ' CE Only
-        Return (Me.rEBypass ^ -1 + (Me.rSwamp + Me.rPrimeE + ((Me.R1 ^ -1 + Me.R2 ^ -1 + Me.rgen ^ -1) ^ -1 / (Me.beta + 1))) ^ -1) ^ -1
-    End Function
-
-    Public Function FcBypass() As Decimal
-        Return LibElectronicsMath.CriticalFrequency(Me.RthCBypass, Me.cBypass)
-    End Function
-
-    Public Function LowestCBypass() As Double
-        Return LibElectronicsMath.Capacitance(Me.RthCBypass, 57.0#)
+        Return LibElectronicsMath.Capacitance(Me.RthCOut, fcLowTargetOffset(numberOfCapacitors, fcLowTargetDefault))
     End Function
 
     Public Function FcLow() As Decimal 'CE, CB, CC
-        Return CDec(Math.Sqrt(Me.Fcin ^ 2 + Me.FcOut ^ 2 + Me.FcBypass ^ 2))
+        Return CDec(Math.Sqrt(Me.Fcin ^ 2 + Me.FcOut ^ 2))
     End Function
+
+    'Public Function RthCBypass() As Double 'Universal CE Only
+    '    Return (Me.rEBypass ^ -1 + (Me.rSwamp + Me.rPrimeE + ((Me.R1 ^ -1 + Me.R2 ^ -1 + Me.rgen ^ -1) ^ -1 / (Me.beta + 1))) ^ -1) ^ -1
+    'End Function
+
+    'Public Function FcBypass() As Decimal
+    '    Return LibElectronicsMath.CriticalFrequency(Me.RthCBypass, Me.cBypass)
+    'End Function
+
+    'Public Function LowestCBypass() As Double
+    '    Return LibElectronicsMath.Capacitance(Me.RthCBypass, 57.0#)
+    'End Function
+
 
 
 End Class

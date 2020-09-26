@@ -1,6 +1,6 @@
 Public Class UniversalBiased
     'Inherits Amplifier
-    'Public ampValues As New Dictionary(Of String, Decimal)
+    'Implements IUviversalBias
 
     'Properties
     Private _VCC As Integer
@@ -76,19 +76,8 @@ Public Class UniversalBiased
     'fields
 
     Public Sub New()
-        'MyBase.fancy = Me.IcSat
-        'MyBase.R1 = Me.R1
-        'MyBase.R2 = Me.R2
-        'MyBase.RC = Me.RC
-        'MyBase.RE = Me.RE
-        'MyBase.beta = Me.beta
-
-        'MyBase.VCECutOff = Me.VCECutOff
-        'MyBase.VCE = Me.VCE
-        'MyBase.ICSat = Me.IcSat
-        'MyBase.IB = Me.IB
-        'MyBase.IC = Me.IC
-        'MyBase.IE = Me.IE
+        Console.WriteLine("U")
+        Console.WriteLine(Me.R1)
     End Sub
 
     Public Function IB() As Decimal
