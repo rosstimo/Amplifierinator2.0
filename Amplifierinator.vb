@@ -17,31 +17,33 @@ Module Amplifierinator
         'Dim testCEAmp = New TestClass() With {.VCC = 30, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(18 * 10 ^ 3), .RC = 3300, .RE = 820, .beta = 200, .rgen = 10000, .RL = 3300, .rSwamp = 150, .cIn = 0.22 * 10 ^ -6, .cOut = 0.47 * 10 ^ -6, .cBypass = 22 * 10 ^ -6}
         'Dim testCEAmp = New UniversalBiasCommonEmitter() With {.VCC = 30, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(18 * 10 ^ 3), .RC = 3300, .RE = 820, .beta = 200}
 
-        Dim CEAmp = New UniversalBiasCommonEmitter() With {.VCC = 30, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(18 * 10 ^ 3), .RC = 3300, .RE = 820, .beta = 200, .rgen = 10000, .RL = 3300, .rSwamp = 150, .cIn = 0.22 * 10 ^ -6, .cOut = 0.47 * 10 ^ -6, .cBypass = 22 * 10 ^ -6}
-        test(CEAmp)
-        Dim CBAmp = New UniversalBiasCommonBase() With {.VCC = 30, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(18 * 10 ^ 3), .RC = 3300, .RE = 820, .beta = 200, .isNPN = True, .rgen = 10000, .RL = 3300, .rSwamp = 150, .cIn = 0.22 * 10 ^ -6, .cOut = 0.47 * 10 ^ -6, .cBypass = 22 * 10 ^ -6}
-        test(CBAmp)
-        Dim CCAmp = New UniversalBiasCommonCollector() With {.VCC = 30, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(18 * 10 ^ 3), .RC = 3300, .RE = 820, .beta = 200, .isNPN = True, .rgen = 10000, .RL = 3300, .rSwamp = 150, .cIn = 0.22 * 10 ^ -6, .cOut = 0.47 * 10 ^ -6, .cBypass = 22 * 10 ^ -6}
-        test(CCAmp)
+        'Dim CEAmp = New UniversalBiasCommonEmitter() With {.VCC = 30, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(18 * 10 ^ 3), .RC = 3300, .RE = 820, .beta = 200, .rgen = 10000, .RL = 3300, .rSwamp = 150, .cIn = 0.22 * 10 ^ -6, .cOut = 0.47 * 10 ^ -6, .cBypass = 22 * 10 ^ -6}
+        Dim CEAmp = New UniversalBiasCommonEmitter
+        'test(CEAmp)
 
-        'Console.WriteLine("Given:")
-        'Console.WriteLine($"VCC = {testCEAmp.VCC}")
-        'Console.WriteLine($"Beta = {testCEAmp.beta}")
-        'Console.WriteLine($"R1 = {testCEAmp.R1}")
-        'Console.WriteLine($"R2 = {testCEAmp.R2}")
-        'Console.WriteLine($"RC = {testCEAmp.RC}")
-        'Console.WriteLine($"RE = {testCEAmp.RE}")
-        'Console.WriteLine()
-        'Console.WriteLine("DC Summery:")
-        ''Console.WriteLine($"IB = {testCEAmp.UniversalBias.IB}")
-        'Console.WriteLine($"IB = {testCEAmp.IB}")
-        'Console.WriteLine($"IC = {testCEAmp.IC}")
-        'Console.WriteLine($"IE = {testCEAmp.IE}")
-        'Console.WriteLine($"VRC = {testCEAmp.VRC}")
-        'Console.WriteLine($"VCE = {testCEAmp.VCE}")
-        'Console.WriteLine($"VRE = {testCEAmp.VRE}")
-        'Console.WriteLine($"VR1 = {testCEAmp.VR1}")
-        'Console.WriteLine($"VR2 = {testCEAmp.VR2}")
+        'Dim CBAmp = New UniversalBiasCommonBase() With {.VCC = 30, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(18 * 10 ^ 3), .RC = 3300, .RE = 820, .beta = 200, .isNPN = True, .rgen = 10000, .RL = 3300, .rSwamp = 150, .cIn = 0.22 * 10 ^ -6, .cOut = 0.47 * 10 ^ -6, .cBypass = 22 * 10 ^ -6}
+        'test(CBAmp)
+        'Dim CCAmp = New UniversalBiasCommonCollector() With {.VCC = 30, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(18 * 10 ^ 3), .RC = 3300, .RE = 820, .beta = 200, .isNPN = True, .rgen = 10000, .RL = 3300, .rSwamp = 150, .cIn = 0.22 * 10 ^ -6, .cOut = 0.47 * 10 ^ -6, .cBypass = 22 * 10 ^ -6}
+        'test(CCAmp)
+
+        Console.WriteLine("Given:")
+        Console.WriteLine($"VCC = {CEAmp.Universalbias.VCC}")
+        Console.WriteLine($"Beta = {CEAmp.Universalbias.beta}")
+        Console.WriteLine($"R1 = {CEAmp.Universalbias.R1}")
+        Console.WriteLine($"R2 = {CEAmp.Universalbias.R2}")
+        Console.WriteLine($"RC = {CEAmp.Universalbias.RC}")
+        Console.WriteLine($"RE = {CEAmp.Universalbias.RE}")
+        Console.WriteLine()
+        Console.WriteLine("DC Summery:")
+        'Console.WriteLine($"IB = {testCEAmp.UniversalBias.IB}")
+        Console.WriteLine($"IB = {CEAmp.Universalbias.IB}")
+        Console.WriteLine($"IC = {CEAmp.Universalbias.IC}")
+        Console.WriteLine($"IE = {CEAmp.Universalbias.IE}")
+        Console.WriteLine($"VRC = {CEAmp.Universalbias.VRC}")
+        Console.WriteLine($"VCE = {CEAmp.Universalbias.VCE}")
+        Console.WriteLine($"VRE = {CEAmp.Universalbias.VRE}")
+        Console.WriteLine($"VR1 = {CEAmp.Universalbias.VR1}")
+        Console.WriteLine($"VR2 = {CEAmp.Universalbias.VR2}")
 
         'Console.WriteLine()
 
