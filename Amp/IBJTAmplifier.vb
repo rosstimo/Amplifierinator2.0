@@ -5,8 +5,8 @@
     Property RL() As Decimal
 
     'AC Stuff
-    Property rSwamp() As Decimal
-    Function rEBypass() As Decimal
+    Property rSwamp() As Decimal ' CE, CB
+    Function rEBypass() As Decimal ' CE, CB
 
     Function rLoadAC() As Decimal
     Function rPrimeE() As Decimal
@@ -32,6 +32,7 @@
     Property cOut() As Decimal
     Property cBypass() As Decimal
     Property FcLowTarget As Decimal
+
     Function RthCIn() As Double 'CE, CB, CC
     Function RthCOut() As Double 'CE, CB, CC
     Function RthCBypass() As Double ' CE Only

@@ -1,7 +1,7 @@
 Public Class UniversalBiasCommonBase
     'Inherits UniversalBiased
     Inherits Amplifier
-
+    'Implements IBJTAmplifier
     'Properties
 
     Private _VCC As Integer
@@ -74,22 +74,78 @@ Public Class UniversalBiasCommonBase
         End Set
     End Property
 
+    Private _rLoadAC As Decimal
+    Public Overrides Property rLoadAC() As Decimal
+        Get
+            Return rLoadACCB()
+        End Get
+        Set(ByVal value As Decimal)
+            _rLoadAC = value
+        End Set
+    End Property
 
-    'Private _zin As Decimal
-    'Public Overrides Property zin() As Decimal
-    '    Get
-    '        Return Me.zince '_zin
-    '    End Get
-    '    Set(ByVal value As Decimal)
-    '        _zin = value
-    '    End Set
-    'End Property
+    Private _zin As Decimal
+    Public Overrides Property zin() As Decimal
+        Get
+            Return Me.ZinCB '_zin
+        End Get
+        Set(ByVal value As Decimal)
+            _zin = value
+        End Set
+    End Property
 
-    Public Shadows Function Zin() As Decimal
+    Private _zout As Decimal
+    Public Overrides Property zout() As Decimal
+        Get
+            Return ZoutCB()
+        End Get
+        Set(ByVal value As Decimal)
+            _zout = value
+        End Set
+    End Property
+
+    Private _vin As Decimal
+    Public Overrides Property vin() As Decimal
+        Get
+            Return vinCB()
+        End Get
+        Set(ByVal value As Decimal)
+            _vin = value
+        End Set
+    End Property
+
+    Private _vout As Decimal
+    Public Overrides Property vout() As Decimal
+        Get
+            Return voutCB()
+        End Get
+        Set(ByVal value As Decimal)
+            _vout = value
+        End Set
+    End Property
+
+
+    Public Function rLoadACCB() As Decimal 'CE, CB
+        Return CDec((Me.RC ^ -1 + Me.RL ^ -1) ^ -1)
+    End Function
+
+    Public Function ZinCB() As Decimal
         Return CDec(((Me.RE - Me.rSwamp) ^ -1 + (Me.rPrimeE + Me.rSwamp) ^ -1) ^ -1)
     End Function
 
-    Public Overloads Function RthCBypass() As Double
+    Public Function ZoutCB() As Decimal
+        Return Me.RC
+    End Function
+
+    Public Function voutCB() As Decimal 'max TODO rename?? deltaIB ??
+        Return CDec(Me.IC * Me.rLoadAC)
+    End Function
+
+    Public Function vinCB() As Decimal 'CE, CB
+        Return Me.IE * (Me.rPrimeE + Me.rSwamp)
+    End Function
+
+    Public Function RthCBypass() As Double
         Return (Me.rEBypass ^ -1 + (Me.rgen ^ -1)) ^ -1 + (Me.R1 ^ -1 + Me.R2 ^ -1 + ((Me.beta + 1) * (Me.rPrimeE + Me.rSwamp)) ^ -1) ^ -1
     End Function
 
@@ -97,11 +153,12 @@ Public Class UniversalBiasCommonBase
         Return LibElectronicsMath.CriticalFrequency(Me.RthCBypass, Me.cBypass)
     End Function
 
-    Public Function LowestCBypass() As Double
-        Return LibElectronicsMath.Capacitance(Me.RthCBypass, 57.0#)
+    Public Shadows numberOfCapacitors As Integer = 3I
+    Public Function lowestcbypass() As Double
+        Return LibElectronicsMath.Capacitance(Me.RthCBypass, Me.fcLowTargetOffset(Me.numberOfCapacitors, Me.fcLowTargetDefault))
     End Function
 
-    Public Overloads Function FcLow() As Decimal
+    Public Overrides Function FcLow() As Decimal
         Return CDec(Math.Sqrt(Me.Fcin ^ 2 + Me.FcOut ^ 2 + Me.FcBypass ^ 2))
     End Function
 

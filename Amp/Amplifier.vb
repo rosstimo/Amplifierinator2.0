@@ -21,13 +21,22 @@ Public Class Amplifier
             _RL = value
         End Set
     End Property
-    Private _rSwamp As Decimal ' CE, CB
+    Private _rSwamp As Decimal
     Public Property rSwamp() As Decimal
         Get
             Return _rSwamp
         End Get
         Set(ByVal value As Decimal)
             _rSwamp = value
+        End Set
+    End Property
+    Private _rLoadAC As Decimal
+    Public Overridable Property rLoadAC() As Decimal
+        Get
+            Return _rLoadAC
+        End Get
+        Set(ByVal value As Decimal)
+            _rLoadAC = value
         End Set
     End Property
     Private _zin As Decimal
@@ -37,6 +46,33 @@ Public Class Amplifier
         End Get
         Set(ByVal value As Decimal)
             _zin = value
+        End Set
+    End Property
+    Private _zout As Decimal
+    Public Overridable Property zout() As Decimal
+        Get
+            Return _zout
+        End Get
+        Set(ByVal value As Decimal)
+            _zout = value
+        End Set
+    End Property
+    Private _vin As Decimal
+    Public Overridable Property vin() As Decimal
+        Get
+            Return _vin
+        End Get
+        Set(ByVal value As Decimal)
+            _vin = value
+        End Set
+    End Property
+    Private _vout As Decimal
+    Public Overridable Property vout() As Decimal
+        Get
+            Return _vout
+        End Get
+        Set(ByVal value As Decimal)
+            _vout = value
         End Set
     End Property
     Private _cIn As Decimal
@@ -109,23 +145,16 @@ Public Class Amplifier
     End Function
 
     'CE , CB Override by CC
-    Public Function Zout() As Decimal
-        Return Me.RC
-    End Function
+    'Public Overridable Function Zout() As Decimal
+    '    Return Me.RC
+    'End Function
 
     Public Function icSatAC() As Decimal 'CE, CB
         Return Me.IC + (Me.VCE / Me.rLoadAC)
     End Function
-    Public Function rLoadAC() As Decimal'CE, CB
-        Return CDec((Me.RC ^ -1 + Me.RL ^ -1) ^ -1)
-    End Function
-    Public Function vout() As Decimal 'max TODO rename?? deltaIB ??
-        Return CDec(Me.IC * Me.rLoadAC)
-    End Function
 
-    Public Function vin() As Decimal 'CE, CB
-        Return Me.IE * (Me.rPrimeE + Me.rSwamp)
-    End Function
+
+
 
     'Frequency Response
     Public Function RthCIn() As Double 'CE, CB, CC
@@ -156,7 +185,7 @@ Public Class Amplifier
         Return LibElectronicsMath.Capacitance(Me.RthCOut, fcLowTargetOffset(numberOfCapacitors, fcLowTargetDefault))
     End Function
 
-    Public Function FcLow() As Decimal 'CE, CB, CC
+    Public Overridable Function FcLow() As Decimal 'CE, CB, CC
         Return CDec(Math.Sqrt(Me.Fcin ^ 2 + Me.FcOut ^ 2))
     End Function
 
