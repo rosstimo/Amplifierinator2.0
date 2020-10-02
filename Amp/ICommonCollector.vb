@@ -1,3 +1,3 @@
 ﻿Public Interface ICommonCollector
-    Inherits IBJTBias, IUviversalBias, IBJTAmplifier
+    Inherits IBJTBias, IUviversalBias, ISeriesCoupled
 End Interface

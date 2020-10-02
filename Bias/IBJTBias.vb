@@ -2,17 +2,17 @@
     'DC Stuff
     'BJT Pin Currents
     Property beta As Integer
-    Function IB() As Decimal
-    Function IC() As Decimal
-    Function IE() As Decimal
+    Property IB() As Decimal
+    Property IC() As Decimal
+    Property IE() As Decimal
     'BJT Pin Voltages
-    Function VB() As Decimal
-    Function VC() As Decimal
-    Function VE() As Decimal
-    Function VCE() As Decimal
-    Function VBE() As Decimal
-    Function VBC() As Decimal
+    Property VB() As Decimal
+    Property VC() As Decimal
+    Property VE() As Decimal
+    Property VCE() As Decimal
+    Property VBE() As Decimal
+    Property VBC() As Decimal
     'Load Line Limits
-    Function IcSat() As Decimal
-    Function VCECutOff() As Decimal
+    Property IcSat() As Decimal
+    Property VCECutOff() As Decimal
 End Interface

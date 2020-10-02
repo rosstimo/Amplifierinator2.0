@@ -1,4 +1,4 @@
 ﻿Public Interface ICommonEmitter
-    Inherits IBJTAmplifier
+    Inherits ISeriesCoupled
     Shadows Property rLoadAC() As Decimal
 End Interface

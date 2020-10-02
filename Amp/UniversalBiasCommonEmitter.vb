@@ -93,6 +93,7 @@ Public Class UniversalBiasCommonEmitter
     End Property
 
     Public Universalbias As New UniversalBiased
+    'Public Selfbias As New SelfBiased
 
     Sub New(Optional ByVal VCC% = 30%,
             Optional ByVal R1% = 120000%,

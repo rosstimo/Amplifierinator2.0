@@ -1,5 +1,5 @@
 ﻿Public Interface IUniversalBiasCommonEmitter
-    Inherits IBJTAmplifier
+    Inherits ISeriesCoupled
     Property zin As Decimal
     Function FcBypass() As Decimal
     Function FcLow() As Decimal

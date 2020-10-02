@@ -1,6 +1,6 @@
 Public Class UniversalBiased
     'Inherits Amplifier
-    'Implements IUviversalBias
+    'Implements IBJTBias
 
     'Properties
     Private _VCC As Integer
