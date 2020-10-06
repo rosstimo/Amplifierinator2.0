@@ -19,14 +19,15 @@ Module Amplifierinator
 
         'Dim CEAmp = New UniversalBiasCommonEmitter() With {.VCC = 30, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(18 * 10 ^ 3), .RC = 3300, .RE = 820, .beta = 200, .rgen = 10000, .RL = 3300, .rSwamp = 150, .cIn = 0.22 * 10 ^ -6, .cOut = 0.47 * 10 ^ -6, .cBypass = 22 * 10 ^ -6}
         'Dim CEAmp = New UniversalBiasCommonEmitter
-        Dim CEAmp = New Amplifier(30, 75000, 91000, 2200, 5100, 200, 10, 100)
+        'Dim CEAmp = New Amplifier(30, 75000, 91000, 2200, 5100, 200, 10, 100)
+        'Dim CEAmp = New Amplifier(30, 16000, 3300, 2200, 110, 200, 0, 2200, 50)
         'test(CEAmp)
 
         'Dim CBAmp = New UniversalBiasCommonBase() With {.VCC = 30, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(18 * 10 ^ 3), .RC = 3300, .RE = 820, .beta = 200, .isNPN = True, .rgen = 10000, .RL = 3300, .rSwamp = 150, .cIn = 0.22 * 10 ^ -6, .cOut = 0.47 * 10 ^ -6, .cBypass = 22 * 10 ^ -6}
         'test(CBAmp)
         'Dim CCAmp = New UniversalBiasCommonCollector() With {.VCC = 30, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(18 * 10 ^ 3), .RC = 3300, .RE = 820, .beta = 200, .isNPN = True, .rgen = 10000, .RL = 3300, .rSwamp = 150, .cIn = 0.22 * 10 ^ -6, .cOut = 0.47 * 10 ^ -6, .cBypass = 22 * 10 ^ -6}
         'test(CCAmp)
-
+        Dim CEAmp = New Amplifier
         Console.WriteLine("Given:")
         Console.WriteLine($"VCC = {CEAmp.CommonEmitter.Universalbias.VCC}")
         Console.WriteLine($"Beta = {CEAmp.CommonEmitter.Universalbias.beta}")

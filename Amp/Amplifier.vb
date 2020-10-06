@@ -111,9 +111,10 @@ Public Class Amplifier
     'Public Universalbias As New UniversalBiased
     Public CommonEmitter As New UniversalBiasCommonEmitter
 
-    Sub New(Optional ByVal VCC% = 30%,
+    Sub New(Optional ByVal VCC% = 24%,
             Optional ByVal R1% = 120000%,
-            Optional ByVal R2% = 18000%,
+            Optional ByVal R2% = 22000%,
+            Optional ByVal RB% = 3300%,
             Optional ByVal RC% = 3300%,
             Optional ByVal RE% = 830%,
             Optional ByVal beta% = 200%,
@@ -124,20 +125,21 @@ Public Class Amplifier
             Optional ByVal cOut# = 1 * 10 ^ -6,
             Optional ByVal cBypass# = 1 * 10 ^ -6
             )
-        Me.CommonEmitter.Universalbias.VCC = VCC
-        Me.CommonEmitter.Universalbias.R1 = R1
-        Me.CommonEmitter.Universalbias.R2 = R2
-        Me.CommonEmitter.Universalbias.RC = RC
-        Me.CommonEmitter.Universalbias.RE = RE
-        Me.CommonEmitter.Universalbias.beta = beta
+        'Me.CommonEmitter.Universalbias.VCC = VCC
+        'Me.CommonEmitter.Universalbias.R1 = R1
+        'Me.CommonEmitter.Universalbias.R2 = R2
+        'Me.CommonEmitter.Universalbias.RB = RB
+        'Me.CommonEmitter.Universalbias.RC = RC
+        'Me.CommonEmitter.Universalbias.RE = RE
+        'Me.CommonEmitter.Universalbias.beta = beta
 
 
-        Me.CommonEmitter.rSwamp = rSwamp
-        Me.CommonEmitter.RL = RL
-        Me.CommonEmitter.rgen = rgen
-        Me.CommonEmitter.cIn = cIn
-        Me.CommonEmitter.cOut = cOut
-        Me.CommonEmitter.cBypass = cBypass
+        'Me.CommonEmitter.rSwamp = rSwamp
+        'Me.CommonEmitter.RL = RL
+        'Me.CommonEmitter.rgen = rgen
+        'Me.CommonEmitter.cIn = cIn
+        'Me.CommonEmitter.cOut = cOut
+        'Me.CommonEmitter.cBypass = cBypass
 
         Console.WriteLine("Amp")
 

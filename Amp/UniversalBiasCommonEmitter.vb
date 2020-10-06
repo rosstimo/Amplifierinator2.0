@@ -98,6 +98,7 @@ Public Class UniversalBiasCommonEmitter
     Sub New(Optional ByVal VCC% = 30%,
             Optional ByVal R1% = 120000%,
             Optional ByVal R2% = 18000%,
+            Optional ByVal RB% = 0%,
             Optional ByVal RC% = 3300%,
             Optional ByVal RE% = 830%,
             Optional ByVal beta% = 200%,
@@ -109,12 +110,13 @@ Public Class UniversalBiasCommonEmitter
             Optional ByVal cBypass# = 1 * 10 ^ -6
             )
 
-        Me.Universalbias.VCC = VCC
-        Me.Universalbias.R1 = R1
-        Me.Universalbias.R2 = R2
-        Me.Universalbias.RC = RC
-        Me.Universalbias.RE = RE
-        Me.Universalbias.beta = beta
+        'Me.Universalbias.VCC = VCC
+        'Me.Universalbias.R1 = R1
+        'Me.Universalbias.R2 = R2
+        'Me.Universalbias.RB = RB
+        'Me.Universalbias.RC = RC
+        'Me.Universalbias.RE = RE
+        'Me.Universalbias.beta = beta
 
 
         Me.rSwamp = rSwamp
