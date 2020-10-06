@@ -47,7 +47,6 @@ error_hander:
         Resume Next
     End Function
 
-
     Private Function metricUnit(num As String) As String()
         'for some reason this can't be called with option explicit on
         Dim can() As String
@@ -100,5 +99,15 @@ broke:
         engFormatUnit = metricUnit(CEngNotation(num))(0) & metricUnit(CEngNotation(num))(1) & baseUnit
     End Function
 
+    Public Shared Function SolveSimultaneousEquation(ByVal a1@, ByVal b1@, ByVal k1@, ByVal a2@, ByVal b2@, ByVal k2@) As (aTermResult@, bTermResult@)
+        Dim aTermResult@, bTermResult@, numerator@, denominator@
+        Dim result = (aTermResult, bTermResult)
+        denominator = (a1 * b2) - (b1 * a2)
+        numerator = (k1 * b2) - (b1 * k2)
+        result.aTermResult = (numerator / denominator)
+        numerator = (a1 * k2) - (k1 * a2)
+        result.bTermResult = (numerator / denominator)
+        Return result
+    End Function
 
 End Class
