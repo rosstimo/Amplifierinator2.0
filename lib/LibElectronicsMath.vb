@@ -91,14 +91,25 @@ broke:
         Resume Next
     End Function
 
-    Public Function engFormat(num As Double) As String() 'returns number in engineering format
+    '<returns>
+    'returns number in engineering format
+    '</returns>
+    Public Function engFormat(num As Double) As String()
         engFormat = metricUnit(CEngNotation(num))
     End Function
 
     Public Function engFormatUnit(num As Double, baseUnit As String) As String 'returns number in engineering format with base unit
         engFormatUnit = metricUnit(CEngNotation(num))(0) & metricUnit(CEngNotation(num))(1) & baseUnit
     End Function
-
+    '<summary>
+    'solves two simultaneous equations
+    '</summary>
+    '<remarks>
+    'This class can add, subtract, multiply And divide.
+    '</remarks>
+    '<returns>
+    'returns tuple with (aTermResult, bTermResult) as decimal
+    '</returns>
     Public Shared Function SolveSimultaneousEquation(ByVal a1@, ByVal b1@, ByVal k1@, ByVal a2@, ByVal b2@, ByVal k2@) As (aTermResult@, bTermResult@)
         Dim aTermResult@, bTermResult@, numerator@, denominator@
         Dim result = (aTermResult, bTermResult)
