@@ -248,7 +248,7 @@ Public Class UniversalBiased
     End Sub
     Private Sub solveIC()
         If Me.optomize Then
-            Me.IC = Me.VRC / Me.RC  'Assume Impedance match RC to C.E. RL
+            Me.IC = (Me.VRC / Me.RC / 2) * 2  'Assume Impedance match RC to C.E. RL
         Else
             Me.IC = Me.IB * Me.beta
         End If
