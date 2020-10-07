@@ -14,7 +14,7 @@ Public Class UniversalBiased
     End Property
 
     Private _R1 As Integer
-    Public Overridable Property R1 As Integer
+    Public Property R1 As Integer
         Get
             Return _R1
         End Get
@@ -23,7 +23,7 @@ Public Class UniversalBiased
         End Set
     End Property
     Private _R2 As Integer
-    Public Overridable Property R2 As Integer
+    Public Property R2 As Integer
         Get
             Return _R2
         End Get
@@ -32,7 +32,7 @@ Public Class UniversalBiased
         End Set
     End Property
     Private _RB As Integer
-    Public Overridable Property RB As Integer
+    Public Property RB As Integer
         Get
             Return _RB
         End Get
@@ -41,7 +41,7 @@ Public Class UniversalBiased
         End Set
     End Property
     Private _RC As Integer
-    Public Overridable Property RC As Integer
+    Public Property RC As Integer
         Get
             Return _RC
         End Get
@@ -50,7 +50,7 @@ Public Class UniversalBiased
         End Set
     End Property
     Private _RE As Integer
-    Public Overridable Property RE As Integer
+    Public Property RE As Integer
         Get
             Return _RE
         End Get
@@ -183,16 +183,22 @@ Public Class UniversalBiased
     Private optomize As Boolean
     Private bootstrap As Boolean
 
-    Public Sub New(Optional ByVal optimize As Boolean = False, Optional ByVal bootstrap As Boolean = False)
-        Me.optomize = optimize
-        Me.bootstrap = bootstrap
+    Public Sub New(Optional ByVal VCC% = 30%,
+            Optional ByVal R1% = 120000%,
+            Optional ByVal R2% = 18000%,
+            Optional ByVal RB% = 0%,
+            Optional ByVal RC% = 3300%,
+            Optional ByVal RE% = 830%,
+            Optional ByVal beta% = 200%)
+        'Me.optomize = optimize
+        'Me.bootstrap = bootstrap
 
-        'Me.RC = ElectronicComponentsLib.Resistor.getCommonResistor(128345)
-        If optomize Then
-            OptomizeDesign()
-        Else
-            Analize()
-        End If
+        ''Me.RC = ElectronicComponentsLib.Resistor.getCommonResistor(128345)
+        'If optomize Then
+        '    OptomizeDesign()
+        'Else
+        '    Analize()
+        'End If
     End Sub
 
     Sub Analize()
@@ -211,7 +217,7 @@ Public Class UniversalBiased
 
     End Sub
 
-    Private Sub OptomizeDesign()
+    Sub OptomizeDesign()
         Me.optomize = True
 
         If Me.VCC = 0 Then
@@ -292,12 +298,12 @@ Public Class UniversalBiased
     End Sub
     Private Sub solveIC()
         If Me.optomize Then
-            If Me.IC = 0 And RC = 0 Then
+            If Me.IC = 0 And Me.RC = 0 Then
                 Me.IC = 1 * 10 ^ -3  'TODO this just sets IC to 1mA
                 solveRC()           'maybe just pick a random RC if not given
-            ElseIf Me.IC <> 0 And RC = 0 Then
+            ElseIf Me.IC <> 0 And Me.RC = 0 Then
                 solveRC()
-            ElseIf Me.IC = 0 And RC <> 0 Then
+            ElseIf Me.IC = 0 And Me.RC <> 0 Then
                 Me.IC = (Me.VRC / Me.RC / 2) * 2  'Assume Impedance match RC to C.E. RL
             End If
         Else

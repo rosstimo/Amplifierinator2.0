@@ -6,7 +6,7 @@ Imports System
 Module Amplifierinator
 
     Sub Main(args As String())
-        'Dim testCEAmp = New UniversalBiased() With {.VCC = 24, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(22 * 10 ^ 3), .RC = 3300, .RE = 830, .beta = 200, .isNPN = True}
+        'Dim testCEAmp = New UniversalBiased() With {.VCC = 24, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(22 * 10 ^ 3), .RC = 3300, .RE = 830, .beta = 200}
         'Dim testCBAmp = New CommonBase() With {.VCC = 24, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(22 * 10 ^ 3), .RC = 3300, .RE = 820, .beta = 200, .isNPN = True, .rGen = 50, .RL = 3300, .rSwamp = 0, .C1 = 100 * 10 ^ -6, .C2 = 10 * 10 ^ -6, .C3 = 10 * 10 ^ -6}
         'Dim testCEAmp = New CommonBase() With {.VCC = 24, .R1 = CInt(360 * 10 ^ 3), .R2 = CInt(56 * 10 ^ 3), .RC = 10000, .RE = 2200, .beta = 200, .isNPN = True, .rGen = 50, .RL = 10500, .rSwamp = 470, .C1 = 68 * 10 ^ -6, .C2 = 0.22 * 10 ^ -6, .C3 = 0.47 * 10 ^ -6}
         'Dim testCEAmp = New CommonCollector() With {.VCC = 9, .R1 = CInt(68000), .R2 = CInt(120000), .RC = 0, .RE = 32, .beta = 200 * 200, .isNPN = True, .rGen = 50, .RL = 8, .rSwamp = 16, .C1 = 68 * 10 ^ -6, .C2 = 0.22 * 10 ^ -6, .C3 = 0.47 * 10 ^ -6}
@@ -28,6 +28,9 @@ Module Amplifierinator
         'Dim CCAmp = New UniversalBiasCommonCollector() With {.VCC = 30, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(18 * 10 ^ 3), .RC = 3300, .RE = 820, .beta = 200, .isNPN = True, .rgen = 10000, .RL = 3300, .rSwamp = 150, .cIn = 0.22 * 10 ^ -6, .cOut = 0.47 * 10 ^ -6, .cBypass = 22 * 10 ^ -6}
         'test(CCAmp)
         Dim test As New UniversalBiased(True)
+        test.RC = 3300
+        test.VCC = 24
+        test.OptomizeDesign()
         Dim CEAmp = New Amplifier
         Console.WriteLine("Given:")
         Console.WriteLine($"VCC = {CEAmp.CommonEmitter.Universalbias.VCC}")
