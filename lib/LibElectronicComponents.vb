@@ -76,24 +76,23 @@ Namespace ElectronicComponentsLib
             Dim digits As Double
             Dim multiplier As Integer
             Dim standardValues = New Integer(23) {10, 11, 12, 13, 15, 16, 18, 20, 22, 24, 27, 30, 33, 36, 39, 43, 47, 51, 56, 62, 68, 75, 82, 91}
+            Try
+                For multiplier = 9 To 0 Step -1
 
-            For multiplier = 9 To 0 Step -1
-
-                If 10 ^ multiplier <= calculatedResistance Then
-
-                    multiplier -= 1
-                    Exit For
-                End If
-            Next
-
-            For digits = UBound(standardValues) To 0 Step -1
-                If standardValues(digits) * 10 ^ multiplier <= calculatedResistance Then
-                    commonValue = standardValues(digits) * 10 ^ multiplier
-
-                    Exit For
-                End If
-            Next
-
+                    If 10 ^ multiplier <= calculatedResistance Then
+                        multiplier -= 1
+                        Exit For
+                    End If
+                Next
+                For digits = UBound(standardValues) To 0 Step -1
+                    If standardValues(digits) * 10 ^ multiplier <= calculatedResistance Then
+                        commonValue = standardValues(digits) * 10 ^ multiplier
+                        Exit For
+                    End If
+                Next
+            Catch e As Exception
+                Console.WriteLine(e.Message & vbNewLine & $"Calculated: {calculatedResistance}, Common Value: {commonValue}")
+            End Try
             Return CommonValue
         End Function
 
