@@ -183,13 +183,23 @@ Public Class UniversalBiased
     Private optomize As Boolean
     Private bootstrap As Boolean
 
-    Public Sub New(Optional ByVal VCC% = 30%,
+    Public Sub New(Optional ByVal VCC% = 24%,
             Optional ByVal R1% = 120000%,
-            Optional ByVal R2% = 18000%,
+            Optional ByVal R2% = 22000%,
             Optional ByVal RB% = 0%,
             Optional ByVal RC% = 3300%,
             Optional ByVal RE% = 830%,
             Optional ByVal beta% = 200%)
+
+        Me.VCC = VCC
+        Me.R1 = R1
+        Me.R2 = R2
+        Me.RB = RB
+        Me.RC = RC
+        Me.RE = RE
+        Me.beta = beta
+        Analize()
+
         'Me.optomize = optimize
         'Me.bootstrap = bootstrap
 
@@ -288,11 +298,20 @@ Public Class UniversalBiased
         Else
             '   | a Term     | b Term                   | k Term
             '------------------------------------------------------
-            '1  |IR2(R1+R2)  | + IB(R2) =               | VCC
-            '2  |IR2(R1)     | + IB(R1+RB+RE(beta+1)) = | VCC - VBE
+            '1  |IR1(R1+R2)  | - IB(R2) =               | VCC
+            '2  |IR1(R1)     | + IB(RB+RE(beta+1)) = | VCC - VBE
+            Dim a1@, b1@, k1@, a2@, b2@, k2@
             Dim a@, b@
             Dim results = (a, b)
-            results = LibElectronicsMath.SolveSimultaneousEquation(Me.R1 + Me.R2, Me.R2, Me.VCC, Me.R1, Me.R1 + Me.RB + (Me.RE * (Me.beta + 1)), Me.VCC - Me.VBE())
+            a1 = Me.R1 + Me.R2
+            b1 = Me.R2 * -1
+            k1 = Me.VCC
+            a2 = Me.R1
+            b2 = Me.RB + (Me.RE * Me.beta + 1)
+            k2 = Me.VCC - Me.VBE
+            'results = LibElectronicsMath.SolveSimultaneousEquation(Me.R1 + Me.R2, Me.R2, Me.VCC, Me.R1, Me.R1 + Me.RB + (Me.RE * (Me.beta + 1)), Me.VCC - Me.VBE())
+            results = LibElectronicsMath.SolveSimultaneousEquation(a1@, b1@, k1@, a2@, b2@, k2@)
+
             Me.IB = results.b
         End If
     End Sub
