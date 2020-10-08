@@ -243,7 +243,7 @@ Public Class UniversalBiased
         solveVCE()
 
         solveIC()
-        'solveRC()
+
         solveIB()
 
         solveIE()
@@ -325,9 +325,11 @@ Public Class UniversalBiased
             If Me.IC = 0 And Me.RC = 0 Then
                 Me.IC = 1 * 10 ^ -3  'TODO this just sets IC to 1mA
                 solveRC()           'maybe just pick a random RC if not given
+                solveVRC()
             ElseIf Me.IC <> 0 And Me.RC = 0 Then
                 solveRC()
-            ElseIf Me.IC = 0 And Me.RC <> 0 Then
+                solveVRC()
+            Else 'If Me.IC = 0 And Me.RC <> 0 Then
                 Me.IC = (Me.VRC / Me.RC / 2) * 2  'Assume Impedance match RC to C.E. RL
             End If
         Else

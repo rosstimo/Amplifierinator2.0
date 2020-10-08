@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "Amplifierinator", "Amplifierinator.vbproj", "{27BE727D-7351-4F66-8A82-94D30D5C8595}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "UnitTests", "Tests\UnitTests\UnitTests.vbproj", "{30C2E5D9-60CF-4A3F-9471-230EF5AD7686}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{27BE727D-7351-4F66-8A82-94D30D5C8595}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27BE727D-7351-4F66-8A82-94D30D5C8595}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27BE727D-7351-4F66-8A82-94D30D5C8595}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30C2E5D9-60CF-4A3F-9471-230EF5AD7686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30C2E5D9-60CF-4A3F-9471-230EF5AD7686}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30C2E5D9-60CF-4A3F-9471-230EF5AD7686}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30C2E5D9-60CF-4A3F-9471-230EF5AD7686}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
