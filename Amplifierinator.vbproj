@@ -6,4 +6,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="Bias">
+      <HintPath>..\LibraryProjects\BiasLibrary\bin\Debug\netcoreapp3.1\Bias.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
