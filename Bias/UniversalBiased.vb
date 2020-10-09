@@ -247,12 +247,7 @@ Public Class UniversalBiased
         solveIB()
 
         solveIE()
-
         solveRE()
-        optomize = False
-        solveVRE()
-        solveVCE()
-        optomize = True
 
         If bootstrap Then
             solveVRB()
