@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Amplifierinator</RootNamespace>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <StartupObject>Amplifierinator.AmplifierinatorModule</StartupObject>
+    <OptionStrict>On</OptionStrict>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Import Include="Amplifierinator" />
+    <Import Include="Amplifierinator.ElectronicComponentsLib" />
+    <Import Include="Amplifierinator.My" />
+  </ItemGroup>
+
+</Project>

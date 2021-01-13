@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Amplifierinator</RootNamespace>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <StartupObject>Amplifierinator.AmplifierinatorModule</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
