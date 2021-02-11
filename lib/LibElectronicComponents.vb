@@ -7,6 +7,17 @@ Namespace ElectronicComponentsLib
         End Sub
     End Module
 
+
+    Namespace Component
+
+    End Namespace
+    Namespace Electronic
+
+    End Namespace
+    Namespace passive
+
+    End Namespace
+
     Public Class Resistor
         'First two digits of a "standard" resistor list
 
