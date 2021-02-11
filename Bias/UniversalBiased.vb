@@ -184,12 +184,12 @@ Public Class UniversalBiased
     Private bootstrap As Boolean
 
     Public Sub New(Optional ByVal VCC% = 24%,
-            Optional ByVal R1% = 120000%,
-            Optional ByVal R2% = 22000%,
-            Optional ByVal RB% = 0%,
-            Optional ByVal RC% = 3300%,
-            Optional ByVal RE% = 830%,
-            Optional ByVal beta% = 200%)
+                    Optional ByVal R1% = 120000%,
+                    Optional ByVal R2% = 22000%,
+                    Optional ByVal RB% = 0%,
+                    Optional ByVal RC% = 3300%,
+                    Optional ByVal RE% = 830%,
+                    Optional ByVal beta% = 200%)
 
         Me.VCC = VCC
         Me.R1 = R1
@@ -273,7 +273,7 @@ Public Class UniversalBiased
 
     Private Sub solveRB()
         If VRB <> 0 Then
-            Me.RB = ElectronicComponentsLib.Resistor.getCommonResistor(Me.VRB / Me.IB)
+            Me.RB = Component.Resistor.getCommonResistor(Me.VRB / Me.IB)
         End If
     End Sub
     Private Sub solveRC()
@@ -295,7 +295,7 @@ Public Class UniversalBiased
     Private Sub solveIB()
         If Me.optomize Then
             Me.IB = Me.IC / Me.beta
-        Else
+        Else 'TODO call from math lib
             '   | a Term     | b Term                   | k Term
             '------------------------------------------------------
             '1  |IR1(R1+R2)  | - IB(R2) =               | VCC
