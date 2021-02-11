@@ -241,11 +241,8 @@ Public Class UniversalBiased
         solveVRC()
         solveVRE()
         solveVCE()
-
         solveIC()
-
         solveIB()
-
         solveIE()
         solveRE()
 
@@ -273,23 +270,23 @@ Public Class UniversalBiased
 
     Private Sub solveRB()
         If VRB <> 0 Then
-            Me.RB = Component.Resistor.getCommonResistor(Me.VRB / Me.IB)
+            Me.RB = Electronic.Component.Resistor.getCommonResistor(Me.VRB / Me.IB)
         End If
     End Sub
     Private Sub solveRC()
         'TODO if 0
         'If Me.RC = 0 Then
-        Me.RC = ElectronicComponentsLib.Resistor.getCommonResistor(Me.VRC / Me.IC)
+        Me.RC = Electronic.Component.Resistor.getCommonResistor(Me.VRC / Me.IC)
         'End If
     End Sub
     Private Sub solveRE()
-        Me.RE = ElectronicComponentsLib.Resistor.getCommonResistor(Me.VRE / Me.IE)
+        Me.RE = Electronic.Component.Resistor.getCommonResistor(Me.VRE / Me.IE)
     End Sub
     Private Sub solveR1()
-        Me.R1 = ElectronicComponentsLib.Resistor.getCommonResistor(Me.VR1 / Me.IR1)
+        Me.R1 = Electronic.Component.Resistor.getCommonResistor(Me.VR1 / Me.IR1)
     End Sub
     Private Sub solveR2()
-        Me.R2 = ElectronicComponentsLib.Resistor.getCommonResistor(Me.VR2 / Me.IR2)
+        Me.R2 = Electronic.Component.Resistor.getCommonResistor(Me.VR2 / Me.IR2)
     End Sub
 
     Private Sub solveIB()
