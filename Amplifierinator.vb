@@ -27,7 +27,8 @@ Module Amplifierinator
         'test(CBAmp)
         'Dim CCAmp = New UniversalBiasCommonCollector() With {.VCC = 30, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(18 * 10 ^ 3), .RC = 3300, .RE = 820, .beta = 200, .isNPN = True, .rgen = 10000, .RL = 3300, .rSwamp = 150, .cIn = 0.22 * 10 ^ -6, .cOut = 0.47 * 10 ^ -6, .cBypass = 22 * 10 ^ -6}
         'test(CCAmp)
-        Dim test As New UniversalBiased()
+
+        Dim test As New BJT.UniversalBias()
         'test.RC = 3300
         'test.VCC = 24
         test.OptomizeDesign()
