@@ -3,9 +3,10 @@ Option Strict On
 Namespace JFET
 
     Class SelfBias
-        Public RG%, RD%, RS%, VDD%, IDSS@, VGSOff@
+        Public RG%, RD%, RS%, RS1%, RS2%, VDD%, IDSS@, VGSOff@
         Public IG% = 0
-        Public CE As New CommonSource
+        Public CS As New CommonSource
+
 
         '''<summary>
         '''ID = IDSS*(1-(VGS/VGSOff))^2
@@ -69,6 +70,21 @@ Namespace JFET
             Return Me.VDD / (Me.RD + Me.RS)
         End Function
 
+        'Common Source Amplifier
+        Private Sub CommonSource()
+            Me.CS.rSwamp = Me.RS1
+            Me.CS.zin = Me.RG
+            Me.CS.zout = Me.RD
+            Me.CS.rPrimeS = 0
+            Me.CS.vinMax = Me.ID * (Me.CS.rPrimeS + Me.CS.rSwamp)
+            Me.CS.voutMax = CDec(Me.ID * (Me.RD ^ -1 + Me.CS.RL ^ -1) ^ -1)
+            Me.CS.Av = Me.CS.voutMax / Me.CS.vinMax
+            Me.CS.Ai = 0
+            Me.CS.Ap = 0
+            Me.CS.idSatAC = 0
+            Me.CS.vdsCutAC = 0
+        End Sub
+
     End Class
 
     Class UniversalBias
@@ -76,10 +92,7 @@ Namespace JFET
     End Class
 
     Class CommonSource
-
-
-
-
+        Public RL%, rgen%, rSwamp%, zin@, zout@, Av@, Ai@, Ap@, rPrimeS@, voutMax@, vinMax@, idSatAC@, vdsCutAC@
     End Class
 
     Class CommonDrain

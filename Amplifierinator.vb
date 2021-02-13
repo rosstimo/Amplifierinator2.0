@@ -157,6 +157,8 @@ Module Amplifierinator
         Console.WriteLine(jf.VGS)
         Console.WriteLine(jf.VRD + jf.VDS + jf.VRS)
 
+
+
     End Sub
 
 
