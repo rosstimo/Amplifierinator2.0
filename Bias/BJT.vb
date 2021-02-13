@@ -1,5 +1,7 @@
 Namespace BJT
-
+    'Base Bias
+    'Collector Feedback
+    'Two Power Supply, Emitter Bias
     Public Class UniversalBias
         'Inherits Amplifier
         'Implements IBJTBias
@@ -393,4 +395,12 @@ Namespace BJT
 
     End Class
 
+    'Common Emitter
+    Class CommonEmmiter
+
+
+    End Class
+    'Common Collector
+    'Common Base
+    'Any Amplifier configuration
 End Namespace

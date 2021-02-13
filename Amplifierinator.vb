@@ -6,6 +6,7 @@ Imports System
 Module Amplifierinator
 
     Sub Main(args As String())
+        testJFET()
         'Dim testCEAmp = New UniversalBiased() With {.VCC = 24, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(22 * 10 ^ 3), .RC = 3300, .RE = 830, .beta = 200}
         'Dim testCBAmp = New CommonBase() With {.VCC = 24, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(22 * 10 ^ 3), .RC = 3300, .RE = 820, .beta = 200, .isNPN = True, .rGen = 50, .RL = 3300, .rSwamp = 0, .C1 = 100 * 10 ^ -6, .C2 = 10 * 10 ^ -6, .C3 = 10 * 10 ^ -6}
         'Dim testCEAmp = New CommonBase() With {.VCC = 24, .R1 = CInt(360 * 10 ^ 3), .R2 = CInt(56 * 10 ^ 3), .RC = 10000, .RE = 2200, .beta = 200, .isNPN = True, .rGen = 50, .RL = 10500, .rSwamp = 470, .C1 = 68 * 10 ^ -6, .C2 = 0.22 * 10 ^ -6, .C3 = 0.47 * 10 ^ -6}
@@ -28,63 +29,66 @@ Module Amplifierinator
         'Dim CCAmp = New UniversalBiasCommonCollector() With {.VCC = 30, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(18 * 10 ^ 3), .RC = 3300, .RE = 820, .beta = 200, .isNPN = True, .rgen = 10000, .RL = 3300, .rSwamp = 150, .cIn = 0.22 * 10 ^ -6, .cOut = 0.47 * 10 ^ -6, .cBypass = 22 * 10 ^ -6}
         'test(CCAmp)
 
-        Dim test As New BJT.UniversalBias()
-        'test.RC = 3300
-        'test.VCC = 24
-        test.OptomizeDesign()
-        Dim CEAmp = New Amplifier
-        Console.WriteLine("Given:")
-        Console.WriteLine($"VCC = {CEAmp.CommonEmitter.Universalbias.VCC}")
-        Console.WriteLine($"Beta = {CEAmp.CommonEmitter.Universalbias.beta}")
-        Console.WriteLine($"R1 = {CEAmp.CommonEmitter.Universalbias.R1}")
-        Console.WriteLine($"R2 = {CEAmp.CommonEmitter.Universalbias.R2}")
-        Console.WriteLine($"RC = {CEAmp.CommonEmitter.Universalbias.RC}")
-        Console.WriteLine($"RE = {CEAmp.CommonEmitter.Universalbias.RE}")
-        Console.WriteLine()
-        Console.WriteLine("DC Summery:")
-        'Console.WriteLine($"IB = {testCEAmp.UniversalBias.IB}")
-        Console.WriteLine($"IB = {CEAmp.CommonEmitter.Universalbias.IB}")
-        Console.WriteLine($"IC = {CEAmp.CommonEmitter.Universalbias.IC}")
-        Console.WriteLine($"IE = {CEAmp.CommonEmitter.Universalbias.IE}")
-        Console.WriteLine($"VRC = {CEAmp.CommonEmitter.Universalbias.VRC}")
-        Console.WriteLine($"VCE = {CEAmp.CommonEmitter.Universalbias.VCE}")
-        Console.WriteLine($"VRE = {CEAmp.CommonEmitter.Universalbias.VRE}")
-        Console.WriteLine($"VR1 = {CEAmp.CommonEmitter.Universalbias.VR1}")
-        Console.WriteLine($"VR2 = {CEAmp.CommonEmitter.Universalbias.VR2}")
+        'Dim test As New BJT.UniversalBias()
+        ''test.RC = 3300
+        ''test.VCC = 24
+        'test.OptomizeDesign()
+        'Dim CEAmp = New Amplifier
+        'Console.WriteLine("Given:")
+        'Console.WriteLine($"VCC = {CEAmp.CommonEmitter.Universalbias.VCC}")
+        'Console.WriteLine($"Beta = {CEAmp.CommonEmitter.Universalbias.beta}")
+        'Console.WriteLine($"R1 = {CEAmp.CommonEmitter.Universalbias.R1}")
+        'Console.WriteLine($"R2 = {CEAmp.CommonEmitter.Universalbias.R2}")
+        'Console.WriteLine($"RC = {CEAmp.CommonEmitter.Universalbias.RC}")
+        'Console.WriteLine($"RE = {CEAmp.CommonEmitter.Universalbias.RE}")
+        'Console.WriteLine()
+        'Console.WriteLine("DC Summery:")
+        ''Console.WriteLine($"IB = {testCEAmp.UniversalBias.IB}")
+        'Console.WriteLine($"IB = {CEAmp.CommonEmitter.Universalbias.IB}")
+        'Console.WriteLine($"IC = {CEAmp.CommonEmitter.Universalbias.IC}")
+        'Console.WriteLine($"IE = {CEAmp.CommonEmitter.Universalbias.IE}")
+        'Console.WriteLine($"VRC = {CEAmp.CommonEmitter.Universalbias.VRC}")
+        'Console.WriteLine($"VCE = {CEAmp.CommonEmitter.Universalbias.VCE}")
+        'Console.WriteLine($"VRE = {CEAmp.CommonEmitter.Universalbias.VRE}")
+        'Console.WriteLine($"VR1 = {CEAmp.CommonEmitter.Universalbias.VR1}")
+        'Console.WriteLine($"VR2 = {CEAmp.CommonEmitter.Universalbias.VR2}")
 
-        Console.WriteLine()
+        'Console.WriteLine()
 
-        Console.WriteLine("AC Summery:")
-        Console.WriteLine($"RL = {CEAmp.CommonEmitter.RL}")
-        Console.WriteLine($"Rswamp = {CEAmp.CommonEmitter.rSwamp}")
-        Console.WriteLine($"Zin = {CEAmp.CommonEmitter.zin}")
-        Console.WriteLine($"Zout = {CEAmp.CommonEmitter.Zout}")
-        Console.WriteLine($"vout max = {CEAmp.CommonEmitter.vout}")
-        Console.WriteLine($"Av = {CEAmp.CommonEmitter.Av}")
-        Console.WriteLine($"AvdB = {CEAmp.CommonEmitter.AvdB}")
-        Console.WriteLine($"Ai = {CEAmp.CommonEmitter.Ai}")
-        Console.WriteLine($"AidB = {CEAmp.CommonEmitter.AidB}")
-        Console.WriteLine($"Ap = {CEAmp.CommonEmitter.Ap}")
-        Console.WriteLine($"ApdB = {CEAmp.CommonEmitter.ApdB}")
-        Console.WriteLine()
-        Console.WriteLine("Frequency Response Summery:")
-        Console.WriteLine($"FcLow = {CEAmp.CommonEmitter.FcLow}")
-        Console.WriteLine($"C1 = {CEAmp.CommonEmitter.cIn}")
-        Console.WriteLine($"RthC1 = {CEAmp.CommonEmitter.RthCIn}")
-        Console.WriteLine($"Fc1 = {CEAmp.CommonEmitter.Fcin}")
-        Console.WriteLine($"Lowest C1 = {CEAmp.CommonEmitter.LowestCIn}")
-        Console.WriteLine($"C2 = {CEAmp.CommonEmitter.cOut}")
-        Console.WriteLine($"RthC2 = {CEAmp.CommonEmitter.RthCOut}")
-        Console.WriteLine($"Fc2 = {CEAmp.CommonEmitter.FcOut}")
-        Console.WriteLine($"Lowest C2 = {CEAmp.CommonEmitter.LowestCOut}")
-        Console.WriteLine($"C3 = {CEAmp.CommonEmitter.cBypass}")
-        Console.WriteLine($"RthC3 = {CEAmp.CommonEmitter.rthcbypass}")
-        Console.WriteLine($"Fc3 = {CEAmp.CommonEmitter.fcbypass}")
-        Console.WriteLine($"Lowest C3 = {CEAmp.CommonEmitter.lowestcbypass}")
+        'Console.WriteLine("AC Summery:")
+        'Console.WriteLine($"RL = {CEAmp.CommonEmitter.RL}")
+        'Console.WriteLine($"Rswamp = {CEAmp.CommonEmitter.rSwamp}")
+        'Console.WriteLine($"Zin = {CEAmp.CommonEmitter.zin}")
+        'Console.WriteLine($"Zout = {CEAmp.CommonEmitter.Zout}")
+        'Console.WriteLine($"vout max = {CEAmp.CommonEmitter.vout}")
+        'Console.WriteLine($"Av = {CEAmp.CommonEmitter.Av}")
+        'Console.WriteLine($"AvdB = {CEAmp.CommonEmitter.AvdB}")
+        'Console.WriteLine($"Ai = {CEAmp.CommonEmitter.Ai}")
+        'Console.WriteLine($"AidB = {CEAmp.CommonEmitter.AidB}")
+        'Console.WriteLine($"Ap = {CEAmp.CommonEmitter.Ap}")
+        'Console.WriteLine($"ApdB = {CEAmp.CommonEmitter.ApdB}")
+        'Console.WriteLine()
+        'Console.WriteLine("Frequency Response Summery:")
+        'Console.WriteLine($"FcLow = {CEAmp.CommonEmitter.FcLow}")
+        'Console.WriteLine($"C1 = {CEAmp.CommonEmitter.cIn}")
+        'Console.WriteLine($"RthC1 = {CEAmp.CommonEmitter.RthCIn}")
+        'Console.WriteLine($"Fc1 = {CEAmp.CommonEmitter.Fcin}")
+        'Console.WriteLine($"Lowest C1 = {CEAmp.CommonEmitter.LowestCIn}")
+        'Console.WriteLine($"C2 = {CEAmp.CommonEmitter.cOut}")
+        'Console.WriteLine($"RthC2 = {CEAmp.CommonEmitter.RthCOut}")
+        'Console.WriteLine($"Fc2 = {CEAmp.CommonEmitter.FcOut}")
+        'Console.WriteLine($"Lowest C2 = {CEAmp.CommonEmitter.LowestCOut}")
+        'Console.WriteLine($"C3 = {CEAmp.CommonEmitter.cBypass}")
+        'Console.WriteLine($"RthC3 = {CEAmp.CommonEmitter.rthcbypass}")
+        'Console.WriteLine($"Fc3 = {CEAmp.CommonEmitter.fcbypass}")
+        'Console.WriteLine($"Lowest C3 = {CEAmp.CommonEmitter.lowestcbypass}")
 
         Console.Read()
     End Sub
-
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="Amp"></param>
     Sub test(ByRef Amp As Object)
         Console.WriteLine(StrDup(80, "-"))
         Console.WriteLine("Given:")
@@ -139,5 +143,21 @@ Module Amplifierinator
         Catch
         End Try
     End Sub
+
+    Sub testJFET()
+        Dim jf = New JFET.SelfBias
+
+        jf.IDSS = 8 * 10 ^ -3
+        jf.VGSOff = -4
+        jf.VDD = 24
+        jf.RG = 120 * 10 ^ 3
+        jf.RD = 6000
+        jf.RS = 1000
+        Console.WriteLine(jf.ID)
+        Console.WriteLine(jf.VGS)
+        Console.WriteLine(jf.VRD + jf.VDS + jf.VRS)
+
+    End Sub
+
 
 End Module
