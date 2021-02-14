@@ -5,8 +5,12 @@ Namespace JFET
     Class SelfBias
         Public RG%, RD%, RS%, RS1%, RS2%, VDD%, IDSS@, VGSOff@
         Public IG% = 0
-        Public CS As New CommonSource
+        Public CommonSource As New CommonSource
+        Public CommonDrain As New CommonDrain
 
+        Sub Analize()
+            getCommonSource()
+        End Sub
 
         '''<summary>
         '''ID = IDSS*(1-(VGS/VGSOff))^2
@@ -71,18 +75,33 @@ Namespace JFET
         End Function
 
         'Common Source Amplifier
-        Private Sub CommonSource()
-            Me.CS.rSwamp = Me.RS1
-            Me.CS.zin = Me.RG
-            Me.CS.zout = Me.RD
-            Me.CS.rPrimeS = 0
-            Me.CS.vinMax = Me.ID * (Me.CS.rPrimeS + Me.CS.rSwamp)
-            Me.CS.voutMax = CDec(Me.ID * (Me.RD ^ -1 + Me.CS.RL ^ -1) ^ -1)
-            Me.CS.Av = Me.CS.voutMax / Me.CS.vinMax
-            Me.CS.Ai = 0
-            Me.CS.Ap = 0
-            Me.CS.idSatAC = 0
-            Me.CS.vdsCutAC = 0
+        Private Sub getCommonSource()
+            Me.CommonSource.rSwamp = Me.RS1
+            Me.CommonSource.zin = Me.RG
+            Me.CommonSource.zout = Me.RD
+            Me.CommonSource.rPrimeS = CDec(Me.VGSOff / (Me.VGS * Math.Sqrt(Me.IDSS * Me.ID)))
+            Me.CommonSource.vinMax = Me.ID * (Me.CommonSource.rPrimeS + Me.CommonSource.rSwamp)
+            Me.CommonSource.voutMax = CDec(Me.ID * (Me.RD ^ -1 + Me.CommonSource.RL ^ -1) ^ -1)
+            Me.CommonSource.Av = Me.CommonSource.voutMax / Me.CommonSource.vinMax
+            Me.CommonSource.Ai = Me.CommonSource.Av * (Me.CommonSource.zin / Me.CommonSource.RL)
+            Me.CommonSource.Ap = Me.CommonSource.Av * Me.CommonSource.Ai
+            Me.CommonSource.idSatAC = CDec(Me.VDS / (Me.RD ^ -1 + Me.CommonSource.RL ^ -1) ^ -1) + Me.ID
+            Me.CommonSource.vdsCutAC = Me.CommonSource.voutMax + Me.VDS
+        End Sub
+
+        'Common Drain Amplifier
+        Private Sub getCommonDrain()
+            Me.CommonDrain.rSwamp = Me.RS1
+            Me.CommonDrain.zin = Me.RG 'TODO
+            Me.CommonDrain.zout = Me.RD 'TODO
+            Me.CommonDrain.rPrimeS = CDec(Me.VGSOff / (Me.VGS * Math.Sqrt(Me.IDSS * Me.ID)))
+            Me.CommonDrain.vinMax = Me.ID * (Me.CommonDrain.rPrimeS + Me.CommonDrain.rSwamp) 'TODO
+            Me.CommonDrain.voutMax = CDec(Me.ID * (Me.RD ^ -1 + Me.CommonDrain.RL ^ -1) ^ -1) 'TODO
+            Me.CommonDrain.Av = Me.CommonDrain.voutMax / Me.CommonDrain.vinMax
+            Me.CommonDrain.Ai = Me.CommonDrain.Av * (Me.CommonDrain.zin / Me.CommonDrain.RL)
+            Me.CommonDrain.Ap = Me.CommonDrain.Av * Me.CommonDrain.Ai
+            Me.CommonDrain.idSatAC = CDec(Me.VDS / (Me.RD ^ -1 + Me.CommonDrain.RL ^ -1) ^ -1) + Me.ID 'TODO
+            Me.CommonDrain.vdsCutAC = Me.CommonDrain.voutMax + Me.VDS
         End Sub
 
     End Class
@@ -96,11 +115,11 @@ Namespace JFET
     End Class
 
     Class CommonDrain
-
+        Public RL%, rgen%, rSwamp%, zin@, zout@, Av@, Ai@, Ap@, rPrimeS@, voutMax@, vinMax@, idSatAC@, vdsCutAC@
     End Class
 
     Class CommonGate
-
+        Public RL%, rgen%, rSwamp%, zin@, zout@, Av@, Ai@, Ap@, rPrimeS@, voutMax@, vinMax@, idSatAC@, vdsCutAC@
     End Class
 
     'FcL

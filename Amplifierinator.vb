@@ -156,7 +156,15 @@ Module Amplifierinator
         Console.WriteLine(jf.ID)
         Console.WriteLine(jf.VGS)
         Console.WriteLine(jf.VRD + jf.VDS + jf.VRS)
-
+        jf.CommonSource.rgen = 50
+        jf.CommonSource.RL = 6000
+        jf.Analize()
+        Console.WriteLine(jf.CommonSource.Av)
+        Console.WriteLine(jf.CommonSource.Ai)
+        Console.WriteLine(jf.CommonSource.Ap)
+        Console.WriteLine(jf.CommonSource.rPrimeS)
+        Console.WriteLine(jf.CommonSource.voutMax)
+        Console.WriteLine(jf.CommonSource.vinMax)
 
 
     End Sub
