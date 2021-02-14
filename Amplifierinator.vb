@@ -159,6 +159,7 @@ Module Amplifierinator
         jf.CommonSource.rgen = 50
         jf.CommonSource.RL = 6000
         jf.Analize()
+        Console.WriteLine(jf.CommonSource.rLAC)
         Console.WriteLine(jf.CommonSource.Av)
         Console.WriteLine(jf.CommonSource.Ai)
         Console.WriteLine(jf.CommonSource.Ap)
