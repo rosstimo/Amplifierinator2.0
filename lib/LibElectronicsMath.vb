@@ -102,23 +102,21 @@ broke:
         engFormatUnit = metricUnit(CEngNotation(num))(0) & metricUnit(CEngNotation(num))(1) & baseUnit
     End Function
     '<summary>
+    'Oops this has moved to Electronic.Math.SolveSimultaneousEquation
     'solves two simultaneous equations
     '</summary>
-    '<remarks>
-    'This class can add, subtract, multiply And divide.
-    '</remarks>
     '<returns>
     'returns tuple with (aTermResult, bTermResult) as decimal
     '</returns>
     Public Shared Function SolveSimultaneousEquation(ByVal a1@, ByVal b1@, ByVal k1@, ByVal a2@, ByVal b2@, ByVal k2@) As (aTermResult@, bTermResult@)
-        Dim aTermResult@, bTermResult@, numerator@, denominator@
-        Dim result = (aTermResult, bTermResult)
-        denominator = (a1 * b2) - (b1 * a2)
-        numerator = (k1 * b2) - (b1 * k2)
-        result.aTermResult = (numerator / denominator)
-        numerator = (a1 * k2) - (k1 * a2)
-        result.bTermResult = (numerator / denominator)
-        Return result
+        'Dim aTermResult@, bTermResult@, numerator@, denominator@
+        'Dim result = (aTermResult, bTermResult)
+        'denominator = (a1 * b2) - (b1 * a2)
+        'numerator = (k1 * b2) - (b1 * k2)
+        'result.aTermResult = (numerator / denominator)
+        'numerator = (a1 * k2) - (k1 * a2)
+        'result.bTermResult = (numerator / denominator)
+        Return Electronic.Math.SolveSimultaneousEquation(a1@, b1@, k1@, a2@, b2@, k2@)
     End Function
 
 
