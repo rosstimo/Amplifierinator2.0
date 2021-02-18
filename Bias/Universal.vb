@@ -11,6 +11,9 @@ Class Universal
     Public CommonCollector As New CommonCollector
     Public CommonBase As New CommonBase
 
+    Sub Analize()
+        GetCommonEmmiter()
+    End Sub
     ''' <summary>
     '''    | a Term     | b Term                | k Term
     '''----------------------------------------------------
@@ -71,20 +74,22 @@ Class Universal
     End Function
 
     Private Sub GetCommonEmmiter()
-        Me.CommonEmitter.RL = Me.RC
-        Me.CommonEmitter.rgen = 50
-        Me.CommonEmitter.rSwamp = Me.RE1
-        Me.CommonEmitter.rPrimeE = CDec(0.026 / Me.IE)
-        Me.CommonEmitter.zin = CDec(Me.R1 ^ -1 + Me.R2 ^ -1 + ((Me.Beta + 1) * (Me.CommonEmitter.rPrimeE + Me.CommonEmitter.rSwamp)) ^ -1)
-        Me.CommonEmitter.zout = Me.RC
-        Me.CommonEmitter.rLAC = CDec((Me.CommonEmitter.zout ^ -1 + Me.CommonEmitter.RL ^ -1) ^ -1)
-        Me.CommonEmitter.voutMax = Me.IC * (Me.CommonEmitter.rLAC)
-        Me.CommonEmitter.vinMax = Me.IE * (Me.Beta + 1) * (Me.CommonEmitter.rPrimeE + Me.CommonEmitter.rSwamp)
-        Me.CommonEmitter.Av = Me.CommonEmitter.voutMax / Me.CommonEmitter.vinMax
-        Me.CommonEmitter.Ai = Me.CommonEmitter.Av * (Me.CommonEmitter.zin / Me.CommonEmitter.RL)
-        Me.CommonEmitter.Ap = Me.CommonEmitter.Av * Me.CommonEmitter.Ai
-        Me.CommonEmitter.icSatAC = (Me.VCE / Me.CommonEmitter.rLAC) + Me.IC
-        Me.CommonEmitter.vceCutAC = Me.VCE + Me.CommonEmitter.voutMax
+        'Me.CommonEmitter.RL = Me.RC
+        'Me.CommonEmitter.rgen = 50
+        ' Me.CommonEmitter.rSwamp = Me.RE1
+        With Me.CommonEmitter
+            .rPrimeE = CDec(0.026 / Me.IE)
+            .zin = CDec((Me.R1 ^ -1 + Me.R2 ^ -1 + ((Me.Beta + 1) * (.rPrimeE + .rSwamp)) ^ -1) ^ -1)
+            .zout = Me.RC
+            .rLAC = CDec((.zout ^ -1 + .RL ^ -1) ^ -1)
+            .voutMax = Me.IC * (.rLAC)
+            .vinMax = Me.IE * (.rPrimeE + .rSwamp)
+            .Av = .voutMax / .vinMax
+            .Ai = .Av * (.zin / .RL)
+            .Ap = .Av * .Ai
+            .icSatAC = (Me.VCE / .rLAC) + Me.IC
+            .vceCutAC = Me.VCE + .voutMax
+        End With
     End Sub
 
     Private Sub GetCommonCollector()

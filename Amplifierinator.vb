@@ -6,7 +6,10 @@ Imports System
 Module Amplifierinator
 
     Sub Main(args As String())
-        testJFET()
+        'testJFET()
+        'TestUniversal()
+        ThingInClass()
+
         'Dim testCEAmp = New UniversalBiased() With {.VCC = 24, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(22 * 10 ^ 3), .RC = 3300, .RE = 830, .beta = 200}
         'Dim testCBAmp = New CommonBase() With {.VCC = 24, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(22 * 10 ^ 3), .RC = 3300, .RE = 820, .beta = 200, .isNPN = True, .rGen = 50, .RL = 3300, .rSwamp = 0, .C1 = 100 * 10 ^ -6, .C2 = 10 * 10 ^ -6, .C3 = 10 * 10 ^ -6}
         'Dim testCEAmp = New CommonBase() With {.VCC = 24, .R1 = CInt(360 * 10 ^ 3), .R2 = CInt(56 * 10 ^ 3), .RC = 10000, .RE = 2200, .beta = 200, .isNPN = True, .rGen = 50, .RL = 10500, .rSwamp = 470, .C1 = 68 * 10 ^ -6, .C2 = 0.22 * 10 ^ -6, .C3 = 0.47 * 10 ^ -6}
@@ -170,5 +173,70 @@ Module Amplifierinator
 
     End Sub
 
+    Sub TestUniversal()
+        Dim uni As New Universal
+        uni.VCC = 24
+        uni.Beta = 200
+        uni.R1 = 120000
+        uni.R2 = 22000
+        uni.RC = 3300
+        uni.RE = 820
+        Console.WriteLine($"IB: {uni.IB}")
+        Console.WriteLine($"IC: {uni.IC}")
+        Console.WriteLine($"IE: {uni.IE}")
+        Console.WriteLine($"VRC: {uni.VRC}")
+        Console.WriteLine($"VCE: {uni.VCE}")
+        Console.WriteLine($"VRE: {uni.VRE}")
+        Console.WriteLine($"VR1: {uni.VR1}")
+        Console.WriteLine($"VR2: {uni.VR2}")
+        With uni.CommonEmitter
+            .rgen = 50
+            .RL = uni.RC
+            .rSwamp = 150
+            uni.Analize()
+            Console.WriteLine($"zin: { .zin}")
+            Console.WriteLine($"zout: { .zout}")
+            Console.WriteLine($"rLAC: { .rLAC}")
+            Console.WriteLine($"r'e: { .rPrimeE}")
+            Console.WriteLine($"voutMax: { .voutMax}")
+            Console.WriteLine($"vinMax: { .vinMax}")
+            Console.WriteLine($"Av: { .Av}")
+            Console.WriteLine($"Ai: { .Ai}")
+            Console.WriteLine($"Ap: { .Ap}")
+        End With
+    End Sub
+
+    Sub ThingInClass()
+        Dim uni As New Universal
+        uni.VCC = 45
+        uni.Beta = 200
+        uni.R1 = 33000
+        uni.R2 = 5100
+        uni.RC = 1000
+        uni.RE = 47 + 180 '220
+        Console.WriteLine($"IB: {uni.IB}")
+        Console.WriteLine($"IC: {uni.IC}")
+        Console.WriteLine($"IE: {uni.IE}")
+        Console.WriteLine($"VRC: {uni.VRC}")
+        Console.WriteLine($"VCE: {uni.VCE}")
+        Console.WriteLine($"VRE: {uni.VRE}")
+        Console.WriteLine($"VR1: {uni.VR1}")
+        Console.WriteLine($"VR2: {uni.VR2}")
+        With uni.CommonEmitter
+            .rgen = 50
+            .RL = uni.RC
+            .rSwamp = 47
+            uni.Analize()
+            Console.WriteLine($"zin: { .zin}")
+            Console.WriteLine($"zout: { .zout}")
+            Console.WriteLine($"rLAC: { .rLAC}")
+            Console.WriteLine($"r'e: { .rPrimeE}")
+            Console.WriteLine($"voutMax: { .voutMax}")
+            Console.WriteLine($"vinMax: { .vinMax}")
+            Console.WriteLine($"Av: { .Av}")
+            Console.WriteLine($"Ai: { .Ai}")
+            Console.WriteLine($"Ap: { .Ap}")
+        End With
+    End Sub
 
 End Module
