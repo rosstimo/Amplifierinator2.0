@@ -21,13 +21,17 @@ Namespace JFET
             'a = 500
             'b = -5
             'c =0.008
+
             a = CDec((Me.IDSS * Me.RS ^ 2) / Me.VGSOff ^ 2)
-            b = ((2 * Me.IDSS * Me.RS) / Me.VGSOff) - 1
-            c = Me.IDSS
+            'b = ((2 * Me.IDSS * Me.RS) / Me.VGSOff) - 1
+            'c = Me.IDSS
+            b = ((2 * Me.IDSS * Me.RS * (1 - Me.VG)) / Me.VGSOff) - 1
+            c = Me.IDSS - ((Me.IDSS * Me.VG * (2 + Me.VG)) / Me.VGSOff)
 
             'quadratic TODO add to math library return tuple or something
             _ID = CDec(-b - Math.Sqrt(b ^ 2 - (4 * a * c))) / (2 * a)
 
+            'Console.WriteLine((_ID ^ 2 * a) + (_ID * b) + c)
 
             Return _ID
         End Function
@@ -127,6 +131,171 @@ Namespace JFET
     End Class
 
     Class UniversalBias
+        Public R1%, R2%, RG%, RD%, RS%, RS1%, RS2%, VDD%, IDSS@, VGSOff@
+        Public IG% = 0
+        Public CommonSource As New CommonSource
+        Public CommonDrain As New CommonDrain
+        Public CommonGate As New CommonGate
+
+
+        Function Guess() As Decimal
+            Dim min@ = 0
+            Dim max@ = Me.VGSOff
+            Dim currentGuess@
+
+            Dim _IDSS@ = 0.008@
+            Dim _VGSOFF@ = -4
+            Dim _VGS@
+            Dim _RS@ = 4700
+            Dim _VG@ = 3
+            Dim _ID@
+            Dim _IRS@
+            max = _VGSOFF
+            min = 0
+
+
+            Do
+                _VGS = (max - min) / 2
+                _ID = CDec(_IDSS * (1 - (_VGS / _VGSOFF)) ^ 2)
+                _IRS = (_VG - _VGS) / _RS
+
+                Console.WriteLine($"max: {max}, min: {min}, VGS: {_VGS}, ID: {_ID}")
+                Console.WriteLine(_IRS)
+                Console.WriteLine(_ID)
+                Console.WriteLine(Math.Abs(_IRS - _ID))
+                Select Case _IRS
+                    Case > _ID
+                        max = _VGS
+                    Case < _ID
+                        min = _VGS
+                    Case = _ID
+                        ' Console.WriteLine("yeah")
+                End Select
+                ' Loop Until (Math.Abs(_VGS - max) < 1 * 10 ^ -6 Or Math.Abs(min - _VGS) < 1 * 10 ^ -6) 'Or _IRS <> _ID
+            Loop Until Math.Abs(_IRS - _ID) <= 100 * 10 ^ -1
+
+            'For i = 1 To 1000
+            '    Console.WriteLine($"max: {max}, min: {min}, VGS: {_VGS}, ID: {_ID} count:{i}")
+            '    _VGS = (max - min) / 2
+
+            '    _ID = CDec(_IDSS * (1 - (_VGS / _VGSOFF)) ^ 2)
+            '    _IRS = (_VG - _VGS) / _RS
+
+            '    If Math.Abs(_VGS - max) > 1 * 10 ^ -6 And Math.Abs(min - _VGS) > 1 * 10 ^ -6 Then
+            '        Select Case _IRS
+            '            Case > _ID
+            '                max = _VGS
+            '            Case < _ID
+            '                min = _VGS
+            '            Case = _ID
+            '                ' Console.WriteLine("yeah")
+            '        End Select
+            '    Else
+            '        Console.WriteLine(Math.Abs(_ID - _IRS))
+            '        Exit For
+            '    End If
+
+            'Next
+
+            'Do
+            '    _ID = _IDSS * (1 - (_VGS / _VGSOFF)) ^ 2
+            '    _VGS -= 0.1@
+            '    Console.WriteLine(_ID)
+            'Loop While _ID >= (_VG - _VGS) / _RS
+
+
+
+            Return 0
+        End Function
+
+        Function IR1() As Double
+            Return Me.VDD / (Me.R1 + Me.R2)
+        End Function
+
+        Function VR1() As Double
+            Return Me.IR1 * Me.R1
+        End Function
+
+        Function VR2() As Double
+            Return Me.IR1 * Me.R2
+        End Function
+
+        ''' <summary>
+        ''' 0=-VR2+VRG+VGS+VRS
+        ''' 0=-VR2+0+VGS+VRS
+        ''' 0=VGS+VRS-VR2
+        ''' VR2-VRS=VGS
+        ''' N-channel JFET: VR2 is lower than VRS therefore VGS should be a negative number.
+        ''' VR2-VGS=VRS
+        ''' VR2-VGS=ID*RS
+        ''' (VR2-VGS)/RS=ID
+        ''' Plot ID through RS as VGS changes 0V to VGSOff
+        ''' The point where this line intercepts the parabola is the Q point
+        ''' </summary>
+        Function VGS() As Double
+            Return Me.VR2 - Me.VRS
+        End Function
+
+        '''<summary>
+        '''ID = IDSS*(1-(VGS/VGSOff))^2
+        '''</summary>
+        Function ID() As Double
+            Dim _ID#, _IDSS#, _RS#, _VGSOFF#, _VG#, a#, b#, c#
+            'a = 500
+            'b = -5
+            'c =0.008
+            _IDSS = 0.008
+            _VGSOFF = -4
+            _RS = 2500
+            _VG = 3
+ _
+            'TODO - Need update for universal bias
+            a = (_IDSS * _RS ^ 2) / _VGSOFF ^ 2
+            b = ((2 * _IDSS * _RS * (1 - _VG)) / _VGSOFF) - 1
+            c = _IDSS - ((_IDSS * _VG * (2 + _VG)) / _VGSOFF)
+
+            'quadratic TODO add to math library return tuple or something
+            _ID = (-b - Math.Sqrt(b ^ 2 - (4 * a * c))) / (2 * a)
+            _ID = 0.002
+            Console.WriteLine((_ID ^ 2 * a) + (_ID * b) + c)
+            Return _ID
+        End Function
+
+        ''' <summary>
+        ''' VRG=IG*RG
+        ''' </summary>
+        Function VRG() As Double
+            Return Me.IG * Me.RG
+        End Function
+
+        Function VRS() As Double
+            Return Me.ID * Me.RS
+        End Function
+
+        Function VRD() As Double
+            Return Me.ID * Me.RD
+        End Function
+
+        Function VDS() As Double
+            Return Me.VDD - Me.VRD - Me.VRS
+        End Function
+
+        Function VG() As Double
+            Return Me.VR2
+        End Function
+
+        Function VD() As Double
+            Return Me.VDS + Me.VRS
+        End Function
+
+        Function VS() As Double
+            Return Me.VRS
+        End Function
+
+        Function IDSat() As Double
+            Return Me.VDD / (Me.RD + Me.RS)
+        End Function
+
 
     End Class
 

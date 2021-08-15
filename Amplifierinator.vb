@@ -6,9 +6,10 @@ Imports System
 Module Amplifierinator
 
     Sub Main(args As String())
-        'testJFET()
+        testJFET()
+        'testJFETUni()
         'TestUniversal()
-        ThingInClass()
+        'ThingInClass()
 
         'Dim testCEAmp = New UniversalBiased() With {.VCC = 24, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(22 * 10 ^ 3), .RC = 3300, .RE = 830, .beta = 200}
         'Dim testCBAmp = New CommonBase() With {.VCC = 24, .R1 = CInt(120 * 10 ^ 3), .R2 = CInt(22 * 10 ^ 3), .RC = 3300, .RE = 820, .beta = 200, .isNPN = True, .rGen = 50, .RL = 3300, .rSwamp = 0, .C1 = 100 * 10 ^ -6, .C2 = 10 * 10 ^ -6, .C3 = 10 * 10 ^ -6}
@@ -153,23 +154,54 @@ Module Amplifierinator
         jf.IDSS = 8 * 10 ^ -3
         jf.VGSOff = -4
         jf.VDD = 24
-        jf.RG = 120 * 10 ^ 3
+        jf.RG = 1 * 10 ^ 6
         jf.RD = 6000
         jf.RS = 1000
         Console.WriteLine(jf.ID)
         Console.WriteLine(jf.VGS)
         Console.WriteLine(jf.VRD + jf.VDS + jf.VRS)
         jf.CommonSource.rgen = 50
-        jf.CommonSource.RL = 6000
+        jf.CommonSource.RL = 12000
         jf.Analize()
         Console.WriteLine(jf.CommonSource.rLAC)
-        Console.WriteLine(jf.CommonSource.Av)
+        Console.WriteLine($"Av:-{jf.CommonSource.Av}")
         Console.WriteLine(jf.CommonSource.Ai)
         Console.WriteLine(jf.CommonSource.Ap)
         Console.WriteLine(jf.CommonSource.rPrimeS)
         Console.WriteLine(jf.CommonSource.voutMax)
         Console.WriteLine(jf.CommonSource.vinMax)
 
+    End Sub
+
+    Sub testJFETUni()
+        Dim jf = New JFET.UniversalBias
+
+        jf.IDSS = 8 * 10 ^ -3
+        jf.VGSOff = -4
+        jf.VDD = 18
+        jf.RG = 0
+        jf.R1 = 150000
+        jf.R2 = 30000
+        jf.RD = 3000
+        jf.RS = 2500
+        jf.Guess()
+        Console.WriteLine(jf.VR1)
+        Console.WriteLine(jf.VR2)
+        Console.WriteLine(jf.VG)
+
+        Console.WriteLine(jf.ID)
+        'Console.WriteLine(jf.VGS)
+        'Console.WriteLine(jf.VRD + jf.VDS + jf.VRS)
+        'jf.CommonSource.rgen = 50
+        'jf.CommonSource.RL = 6000
+        'jf.Analize()
+        'Console.WriteLine(jf.CommonSource.rLAC)
+        'Console.WriteLine(jf.CommonSource.Av)
+        'Console.WriteLine(jf.CommonSource.Ai)
+        'Console.WriteLine(jf.CommonSource.Ap)
+        'Console.WriteLine(jf.CommonSource.rPrimeS)
+        'Console.WriteLine(jf.CommonSource.voutMax)
+        'Console.WriteLine(jf.CommonSource.vinMax)
 
     End Sub
 
