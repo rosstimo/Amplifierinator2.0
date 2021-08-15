@@ -1,3 +1,6 @@
+Option Explicit On
+Option Strict On
+
 Public Class LibElectronicsMath
 
     Public Shared Function CriticalFrequency(ByRef R As Double, ByRef C As Double) As Decimal
