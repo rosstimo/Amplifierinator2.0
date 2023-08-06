@@ -1,4 +1,7 @@
-Public Class ElectronicsMath
+Option Explicit On
+Option Strict On
+
+Public Class LibElectronicsMath
 
     Public Shared Function CriticalFrequency(ByRef R As Double, ByRef C As Double) As Decimal
         Return CDec((2 * Math.PI * R * C) ^ -1)
@@ -47,7 +50,6 @@ error_hander:
         Resume Next
     End Function
 
-
     Private Function metricUnit(num As String) As String()
         'for some reason this can't be called with option explicit on
         Dim can() As String
@@ -92,13 +94,34 @@ broke:
         Resume Next
     End Function
 
-    Public Function engFormat(num As Double) As String() 'returns number in engineering format
+    '<returns>
+    'returns number in engineering format
+    '</returns>
+    Public Function engFormat(num As Double) As String()
         engFormat = metricUnit(CEngNotation(num))
     End Function
 
     Public Function engFormatUnit(num As Double, baseUnit As String) As String 'returns number in engineering format with base unit
         engFormatUnit = metricUnit(CEngNotation(num))(0) & metricUnit(CEngNotation(num))(1) & baseUnit
     End Function
+    '<summary>
+    'Oops this has moved to Electronic.Math.SolveSimultaneousEquation
+    'solves two simultaneous equations
+    '</summary>
+    '<returns>
+    'returns tuple with (aTermResult, bTermResult) as decimal
+    '</returns>
+    Public Shared Function SolveSimultaneousEquation(ByVal a1@, ByVal b1@, ByVal k1@, ByVal a2@, ByVal b2@, ByVal k2@) As (aTermResult@, bTermResult@)
+        'Dim aTermResult@, bTermResult@, numerator@, denominator@
+        'Dim result = (aTermResult, bTermResult)
+        'denominator = (a1 * b2) - (b1 * a2)
+        'numerator = (k1 * b2) - (b1 * k2)
+        'result.aTermResult = (numerator / denominator)
+        'numerator = (a1 * k2) - (k1 * a2)
+        'result.bTermResult = (numerator / denominator)
+        Return Electronic.Math.SolveSimultaneousEquation(a1@, b1@, k1@, a2@, b2@, k2@)
+    End Function
+
 
 
 End Class
